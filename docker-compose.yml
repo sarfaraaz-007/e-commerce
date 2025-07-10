@@ -37,7 +37,6 @@ services:
     networks:
       - microservices-net
 
-#Abid
   maildev:
     container_name: ms_maildev
     image: maildev/maildev
