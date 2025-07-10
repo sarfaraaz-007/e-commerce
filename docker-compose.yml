@@ -1,0 +1,55 @@
+services:
+  postgresql:
+    container_name: ms_pg_sql
+    image: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+
+  mongo:
+    image: mongo
+    container_name: mongo_db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: abid
+      MONGO_INITDB_ROOT_PASSWORD: pass
+    networks:
+      - microservices-net
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo_express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: abid
+      ME_CONFIG_BASICAUTH_PASSWORD: pass
+      ME_CONFIG_MONGODB_URL: mongodb://abid:pass@mongo:27017/
+    networks:
+      - microservices-net
+
+
+  maildev:
+    container_name: ms_maildev
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+
+networks:
+  microservices-net:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
+  mongo:
