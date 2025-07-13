@@ -1,6 +1,6 @@
-package com.alibou.ecommerce.order;
+package com.alibou.ecommerce.orderline;
 
-import com.alibou.ecommerce.orderline.OrderLine;
+import com.alibou.ecommerce.order.Order;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,5 +13,12 @@ public class OrderLineMapper {
                         .id(request.orderId())
                         .build())
                 .build();
+    }
+
+    public OrderLineResponse toOrderLineResponse(OrderLine orderLine) {
+        return new OrderLineResponse(
+                orderLine.getId(),
+                orderLine.getQuantity()
+        );
     }
 }

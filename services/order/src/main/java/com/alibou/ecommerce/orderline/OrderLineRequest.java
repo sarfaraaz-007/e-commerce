@@ -1,7 +1,4 @@
-package com.alibou.ecommerce.order;
-
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+package com.alibou.ecommerce.orderline;
 
 public record OrderLineRequest(Integer id,
                                Integer orderId,
